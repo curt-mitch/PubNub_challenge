@@ -1,0 +1,220 @@
+{
+  "devices_users": {
+    "Windows": 5,
+    "Other": 1
+  },
+  "top_sub_keys": {},
+  "channels_msg_vol": {
+    "GOOG": 10,
+    "TRI": 10,
+    "F": 10,
+    "FB": 10,
+    "AAPL": 10,
+    "EA": 10,
+    "ORCL": 10,
+    "pubnub-public-origin-servers": 1,
+    "ZNGA": 10,
+    "CBS": 10,
+    "SOFIX": 8,
+    "YHOO": 10,
+    "BIDU": 10,
+    "MSFT": 10,
+    "LNKD": 10
+  },
+  "timestamp": 1407984162,
+  "region": "amsterdam",
+  "countries_msg_vol": {
+    "BG": 112,
+    "ZA": 26,
+    "US": 1
+  },
+  "devices_msg_vol": {
+    "Windows": 138,
+    "Other": 1
+  },
+  "geo_map": [
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "GOOG"
+    },
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "TRI"
+    },
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "SOFIX"
+    },
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "F"
+    },
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "AAPL"
+    },
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "EA"
+    },
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "ORCL"
+    },
+    {
+      "lat": 38,
+      "lng": -97,
+      "geos": [],
+      "channel": "pubnub-public-origin-servers"
+    },
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "ZNGA"
+    },
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "CBS"
+    },
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "FB"
+    },
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "YHOO"
+    },
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "BIDU"
+    },
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "MSFT"
+    },
+    {
+      "lat": null,
+      "lng": null,
+      "geos": [
+        [
+          42.68330001831055,
+          23.316699981689453
+        ]
+      ],
+      "channel": "LNKD"
+    }
+  ],
+  "msg_totals": {
+    "p": 1,
+    "s": 138,
+    "t": 0,
+    "h": 0
+  },
+  "channels_users": {
+    "GOOG": 0,
+    "TRI": 0,
+    "F": 0,
+    "FB": 0,
+    "AAPL": 5,
+    "EA": 0,
+    "ORCL": 0,
+    "pubnub-public-origin-servers": 1,
+    "ZNGA": 0,
+    "CBS": 0,
+    "SOFIX": 0,
+    "YHOO": 0,
+    "BIDU": 0,
+    "MSFT": 0,
+    "LNKD": 0
+  }
+}
