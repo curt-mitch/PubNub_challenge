@@ -2,9 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/style.css">
   <title>PubNub Developer Dashboard</title>
 </head>
 <body>
-
+  <h1>PubNub developer dashboard</h1>
+  <div id="dev-content">
+    <div class="dev-column">
+      <div class="input-box">
+        <label for="channel">channel</label>
+        <input type="text" value="rts-X7w2stTH8M0zILImrf6S" class="dev-input" id="channel">
+      </div>
+      <div class="input-box">
+        <label for="origin">origin</label>
+        <input type="text" value="pubsub.pubnub.com" class="dev-input" id="origin">
+      </div>
+      <div class="input-box">
+        <label for="auth-key">auth key</label>
+        <input type="checkbox" value="" class="dev-input" id="auth-key">
+      </div>
+    </div>
+    <div class="dev-column">
+      <div class="input-box">
+        <label for="pub-key">publish key</label>
+        <input type="text" value="demo" class="dev-input" id="pub-key">
+      </div>
+      <div class="input-box">
+        <label for="sub-key">subscribe key</label>
+        <input type="text" value="demo" class="dev-input" id="sub-key">
+      </div>
+      <div class="input-box">
+        <label for="cipher-key">cipher key</label>
+        <input type="checkbox" class="dev-input" id="cipher-key">
+      </div>
+    </div>
+  </div>
 </body>
 </html>
