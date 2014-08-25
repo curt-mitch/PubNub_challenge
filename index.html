@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/chosen.css">
   <script src="js/lib/jquery-2.1.1.js"></script>
   <script src="js/lib/d3.js"></script>
+  <script src="js/lib/chosen.jquery.js"></script>
   <script src="js/dev-graphs.js"></script>
   <title>PubNub Developer Dashboard</title>
 </head>
@@ -39,6 +41,13 @@
         <input type="checkbox" class="dev-input" id="cipher-key">
       </div>
     </div>
+  </div>
+  <div class="graph-selector dev-content">
+    <h3>Channel Data</h3>
+    <select name="graph-select" id="graph-select" class="chosen-menu" data-placeholder="Select graphs to view" multiple>
+      <option value="volume-per-channel">Volume per Channel</option>
+      <option value="volume-per-country">Volume per Country</option>
+    </select>
   </div>
 </body>
 </html>
