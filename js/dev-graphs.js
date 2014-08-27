@@ -39,14 +39,15 @@ $(document).ready(function() {
         volume: countryVol[key]
       });
     }
-    console.log('countryVolValues', countryVolValues);
-
-    console.log('channelVol',channelVol);
-    console.log('channelVolValues', channelVolValues);
 
     // initialize Chosen multiple-select menu
     $('#graph-select').chosen({
       width: '25%'
+    });
+
+    $('#graph-select').change(function(evt, params){
+      $(params.selected).show();
+      $(params.deselected).hide();
     });
 
     // declare variables for d3 graphs
@@ -64,7 +65,7 @@ $(document).ready(function() {
     var countryObjLength = countryVolValues.length
 
     // chart for volume per channel
-    var channel_chart = d3.select('.channel-chart')
+    var channel_chart = d3.select('#channel-chart')
                   .append('svg')
                   .attr('width', width)
                   .attr('height', height);
@@ -103,7 +104,7 @@ $(document).ready(function() {
         .attr('font-size', '10px');
 
     // chart for volume per country
-    var country_chart = d3.select('.country-chart')
+    var country_chart = d3.select('#country-chart')
                   .append('svg')
                   .attr('width', width)
                   .attr('height', height);
