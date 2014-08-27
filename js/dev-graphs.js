@@ -98,10 +98,9 @@ $(document).ready(function() {
           return i * (width / channelObjLength) + 5;
         })
         .attr('y', function(d) {
-          return height - (d.volume * 10) + 15;
+          return height - (d.volume * 10) - 5;
         })
-        .attr('font-size', '10px')
-        .attr('fill', 'white');
+        .attr('font-size', '10px');
 
     // chart for volume per country
     var country_chart = d3.select('.country-chart')
