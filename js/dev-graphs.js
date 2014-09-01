@@ -25,8 +25,10 @@ $(document).ready(function() {
   function parseData(channelData) {
     var channelVolValues = [];
     var countryVolValues = [];
+    var geoLocationValues = [];
     var channelVol = channelData.channels_msg_vol;
     var countryVol = channelData.countries_msg_vol;
+    var geoLocations = channelData.geo_map;
     for(var key in channelVol) {
       channelVolValues.push({
         channel: key,
@@ -39,6 +41,17 @@ $(document).ready(function() {
         volume: countryVol[key]
       });
     }
+    for(var i in geoLocations) {
+      if(!(geoLocations[i].geos[0])) {
+        geoLocations[i].geos[0] = [0,0];
+      }
+      geoLocationValues.push({
+        channel: geoLocations[i].channel,
+        location: geoLocations[i].geos[0]
+      });
+    }
+    console.log('channelData',channelData);
+    console.log('geoLocationValues',geoLocationValues);
 
     // initialize Chosen multiple-select menu
     $('#graph-select').chosen({
@@ -60,87 +73,139 @@ $(document).ready(function() {
     var width = 600 - margin.left - margin.right;
     var height = 250 - margin.top - margin.bottom;
 
+    var mapWidth = 960;
+    var mapHeight = 480;
+
     var barPadding = 1;
     var channelObjLength = channelVolValues.length
     var countryObjLength = countryVolValues.length
 
     // chart for volume per channel
     var channel_chart = d3.select('#channel-chart')
-                  .append('svg')
-                  .attr('width', width)
-                  .attr('height', height);
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height);
 
     channel_chart.selectAll('rect')
-        .data(channelVolValues)
-        .enter()
-        .append('rect')
-        .attr('x', function(d, i) {
-              return i * (width / channelObjLength);
-        })
-        .attr('y', function(d) {
-              return height - (d.volume * 10);
-        })
-        .attr('width', width / channelObjLength - barPadding)
-        .attr('height', function(d) {
-              return d.volume * 10;
-        })
-        .attr('fill', function(d) {
-              return "rgb(0, 0, " + (d.volume * 50) + ")";
-        });
+      .data(channelVolValues)
+      .enter()
+      .append('rect')
+      .attr('x', function(d, i) {
+        return i * (width / channelObjLength);
+      })
+      .attr('y', function(d) {
+        return height - (d.volume * 10);
+      })
+      .attr('width', width / channelObjLength - barPadding)
+      .attr('height', function(d) {
+        return d.volume * 10;
+      })
+      .attr('fill', function(d) {
+        return "rgb(0, 0, " + (d.volume * 50) + ")";
+      });
 
     channel_chart.selectAll('text')
-        .data(channelVolValues)
-        .enter()
-        .append('text')
-        .text(function(d) {
-          return d.channel;
-        })
-        .attr('x', function(d, i) {
-          return i * (width / channelObjLength) + 5;
-        })
-        .attr('y', function(d) {
-          return height - (d.volume * 10) - 5;
-        })
-        .attr('font-size', '10px');
+      .data(channelVolValues)
+      .enter()
+      .append('text')
+      .text(function(d) {
+        return d.channel;
+      })
+      .attr('x', function(d, i) {
+        return i * (width / channelObjLength) + 5;
+      })
+      .attr('y', function(d) {
+        return height - (d.volume * 10) - 5;
+      })
+      .attr('font-size', '10px');
 
     // chart for volume per country
     var country_chart = d3.select('#country-chart')
-                  .append('svg')
-                  .attr('width', width)
-                  .attr('height', height);
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height);
 
     country_chart.selectAll('rect')
-        .data(countryVolValues)
-        .enter()
-        .append('rect')
-        .attr('x', function(d, i) {
-              return i * (width / countryObjLength);
-        })
-        .attr('y', function(d) {
-              return height - (d.volume);
-        })
-        .attr('width', width / countryObjLength - barPadding)
-        .attr('height', function(d) {
-              return d.volume * 10;
-        })
-        .attr('fill', function(d) {
-              return "rgb(0, 0, " + (d.volume * 100) + ")";
-        });
+      .data(countryVolValues)
+      .enter()
+      .append('rect')
+      .attr('x', function(d, i) {
+        return i * (width / countryObjLength);
+      })
+      .attr('y', function(d) {
+        return height - (d.volume);
+      })
+      .attr('width', width / countryObjLength - barPadding)
+      .attr('height', function(d) {
+        return d.volume * 10;
+      })
+      .attr('fill', function(d) {
+        return "rgb(0, 0, " + (d.volume * 100) + ")";
+      });
 
     country_chart.selectAll('text')
-        .data(countryVolValues)
-        .enter()
-        .append('text')
-        .text(function(d) {
-          return d.country;
-        })
-        .attr('x', function(d, i) {
-          return i * (width / countryObjLength) + 5;
-        })
-        .attr('y', function(d) {
-          return height - d.volume - 5;
-        })
-        .attr('font-size', '10px');
+      .data(countryVolValues)
+      .enter()
+      .append('text')
+      .text(function(d) {
+        return d.country;
+      })
+      .attr('x', function(d, i) {
+        return i * (width / countryObjLength) + 5;
+      })
+      .attr('y', function(d) {
+        return height - d.volume - 5;
+      })
+      .attr('font-size', '10px');
+
+    // map for channel geolocations
+    var projection = d3.geo.equirectangular()
+      .scale(153)
+      .translate([mapWidth / 2, mapHeight / 2])
+      .precision(.1);
+
+    var path = d3.geo.path()
+      .projection(projection);
+
+    var graticule = d3.geo.graticule();
+
+    var channelMap = d3.select('#channel-map')
+      .append('svg')
+      .attr('width', mapWidth)
+      .attr('height', mapHeight);
+
+    channelMap.append('path')
+      .datum(graticule)
+      .attr('class', 'graticule')
+      .attr('d', path);
+
+    d3.json('/data/mapData.json', function(error, world) {
+      channelMap.insert('path', '.graticule')
+        .datum(topojson.feature(world, world.objects.land))
+        .attr('class', 'land')
+        .attr('d', path);
+
+      channelMap.insert('path', '.graticule')
+        .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+        .attr('class', 'boundary')
+        .attr('d', path);
+    });
+
+    channelMap.selectAll('.map-pin')
+      .data(geoLocationValues)
+      .enter().append('circle', '.map-pin')
+      .attr('r', 5)
+      .attr('fill', 'yellow')
+      .attr('transform', function(d) {
+        console.log('geoLocationValues d',d);
+        return "translate(" + projection([
+          d.location[1],
+          d.location[0]
+        ]) + ')'
+      });
+
+    d3.select(self.frameElement).style("height", mapHeight + "px");
+
 
   };
 

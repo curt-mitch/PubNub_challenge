@@ -8,6 +8,7 @@
   <script src="js/lib/d3.js"></script>
   <script src="js/lib/chosen.jquery.js"></script>
   <script src="js/dev-graphs.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
   <title>PubNub Developer Dashboard</title>
 </head>
 <body>
@@ -47,11 +48,15 @@
     <select name="graph-select" id="graph-select" class="chosen-menu" data-placeholder="Select graphs to view" multiple>
       <option value="#channel-chart">Volume per Channel</option>
       <option value="#country-chart">Volume per Country</option>
+      <option value="#channel-map">Channel Geolocations</option>
     </select>
     <div id="channel-chart" style="display:none">
       <div></div>
     </div>
     <div id="country-chart" style="display:none">
+      <div></div>
+    </div>
+    <div id="channel-map" style="display:none">
       <div></div>
     </div>
   </div>

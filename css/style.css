@@ -29,3 +29,20 @@ body {
   background: transparent;
   font-size: 11px;
 }
+
+.graticule {
+  fill: none;
+  stroke: #777;
+  stroke-width: .5px;
+  stroke-opacity: .5;
+}
+
+.land {
+  fill: #222;
+}
+
+.boundary {
+  fill: none;
+  stroke: #FFF;
+  stroke-width: .5px;
+}
