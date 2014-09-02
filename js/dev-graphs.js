@@ -26,6 +26,7 @@ $(document).ready(function() {
     var channelVolValues = [];
     var countryVolValues = [];
     var geoLocationValues = [];
+    var geoSourceValue = [];
     var channelVol = channelData.channels_msg_vol;
     var countryVol = channelData.countries_msg_vol;
     var geoLocations = channelData.geo_map;
@@ -43,15 +44,16 @@ $(document).ready(function() {
     }
     for(var i in geoLocations) {
       if(!(geoLocations[i].geos[0])) {
-        geoLocations[i].geos[0] = [0,0];
+        geoSourceValue.push({
+          location: [geoLocations[i].lat, geoLocations[i].lng]
+        });
+      } else {
+        geoLocationValues.push({
+          channel: geoLocations[i].channel,
+          location: geoLocations[i].geos[0]
+        });
       }
-      geoLocationValues.push({
-        channel: geoLocations[i].channel,
-        location: geoLocations[i].geos[0]
-      });
     }
-    console.log('channelData',channelData);
-    console.log('geoLocationValues',geoLocationValues);
 
     // initialize Chosen multiple-select menu
     $('#graph-select').chosen({
@@ -191,20 +193,24 @@ $(document).ready(function() {
         .attr('d', path);
     });
 
-    channelMap.selectAll('.map-pin')
-      .data(geoLocationValues)
+    function mapSources(div, data, color) {
+      channelMap.selectAll(div)
+      .data(data)
       .enter().append('circle', '.map-pin')
       .attr('r', 5)
-      .attr('fill', 'yellow')
+      .attr('fill', color)
       .attr('transform', function(d) {
-        console.log('geoLocationValues d',d);
         return "translate(" + projection([
           d.location[1],
           d.location[0]
         ]) + ')'
       });
+    }
 
-    d3.select(self.frameElement).style("height", mapHeight + "px");
+    mapSources('.map-pin', geoLocationValues, 'yellow');
+    mapSources('.source-pin', geoSourceValue, 'red');
+
+    // d3.select(self.frameElement).style("height", mapHeight + "px");
 
 
   };
