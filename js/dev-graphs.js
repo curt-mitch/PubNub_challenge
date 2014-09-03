@@ -216,7 +216,7 @@ $(document).ready(function() {
     var mapLegend = channelMap.append('g')
       .attr('transform', 'translate(' + (mapHeight - 50) + ',' + (mapHeight - 20) + ')')
       .selectAll('g')
-      .data(['subscriber','publisher'])
+      .data(legendLabels)
       .enter().append('g');
 
     mapLegend.append('circle')
