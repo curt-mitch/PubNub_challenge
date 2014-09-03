@@ -1,6 +1,6 @@
 body {
   background-color: #F5F5F5;
-  font-family: "proxima-nova-thin","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "proxima-nova-thin","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 #dev-content {
@@ -46,3 +46,15 @@ body {
   stroke: #FFF;
   stroke-width: .5px;
 }
+
+.chosen-container {
+  margin-bottom: 25px;
+}
+
+#channel-chart svg:first-of-type, #country-chart svg:first-of-type {
+  padding: 20px 40px;
+}
+
+#channel-map svg:first-of-type {
+  padding-right: 120px;
+};

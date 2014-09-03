@@ -197,7 +197,7 @@ $(document).ready(function() {
       channelMap.selectAll(div)
       .data(data)
       .enter().append('circle', '.map-pin')
-      .attr('r', 5)
+      .attr('r', 3)
       .attr('fill', color)
       .attr('transform', function(d) {
         return "translate(" + projection([
@@ -207,11 +207,29 @@ $(document).ready(function() {
       });
     }
 
-    mapSources('.map-pin', geoLocationValues, 'yellow');
+    var legendLabels = ['subscribers', 'publisher'];
+    var legendColors = ['lightgreen', 'red'];
+
+    mapSources('.map-pin', geoLocationValues, 'lightgreen');
     mapSources('.source-pin', geoSourceValue, 'red');
 
-    // d3.select(self.frameElement).style("height", mapHeight + "px");
+    var mapLegend = channelMap.append('g')
+      .attr('transform', 'translate(' + (mapHeight - 50) + ',' + (mapHeight - 20) + ')')
+      .selectAll('g')
+      .data(['subscriber','publisher'])
+      .enter().append('g');
 
+    mapLegend.append('circle')
+      .attr('cy', function(d, i) { return (i * 20) - 405; })
+      .attr('cx', 550)
+      .attr('r', 4)
+      .style('fill', function(d, i) { return legendColors[i]; });
+
+    mapLegend.append('text')
+      .attr('x', 565)
+      .attr('y', function(d, i) { return (i * 20) - 400; })
+      .text(function(d, i) { return legendLabels[i]; })
+      .style('font-size', '16px')
 
   };
 
