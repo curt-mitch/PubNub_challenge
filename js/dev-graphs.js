@@ -3,24 +3,42 @@
 
 var channelData = {};
 
+var PUBNUB_demo = PUBNUB.init({
+  publish_key: 'demo',
+  subscribe_key: 'demo'
+});
+
 $(document).ready(function() {
 
-  $.ajax({
-    type: 'GET',
-    dataType: 'json',
-    url: '/data/sampleData.json',
-    success: handleData,
-    error: ajaxError
-  });
+  // AJAX call for sample data JSON
+  // $.ajax({
+  //   type: 'GET',
+  //   dataType: 'json',
+  //   url: '/data/sampleData.json',
+  //   success: handleData,
+  //   error: ajaxError
+  // });
 
-  function ajaxError() {
-    console.log('failed to fetch JSON');
-  };
+  // function ajaxError() {
+  //   console.log('failed to fetch JSON');
+  // };
 
-  function handleData(data) {
-    channelData = data;
-    parseData(channelData);
-  };
+  // function handleData(data) {
+  //   channelData = data;
+  //   parseData(channelData);
+  // };
+
+  var pubnubMsgs = []
+
+  PUBNUB_demo.subscribe({
+    channel: 'rts-X7w2stTH8M0zILImrf6S',
+    callback: function(m){
+      parseData(m);
+      PUBNUB_demo.unsubscribe({
+        channel : 'rts-X7w2stTH8M0zILImrf6S',
+      });
+    }
+});
 
   function parseData(channelData) {
     var channelVolValues = [];
